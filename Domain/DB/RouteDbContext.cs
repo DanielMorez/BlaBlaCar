@@ -60,9 +60,6 @@ namespace BlaBlaCar.Domain.DB
             {
                 b.ToTable("Routes");
                 EntityId(b);
-                b.Property(x => x.RouteId)
-                    .HasColumnName("RouteId")
-                    .IsRequired();
                 b.Property(x => x.Car)
                     .HasColumnName("Car")
                     .IsRequired();

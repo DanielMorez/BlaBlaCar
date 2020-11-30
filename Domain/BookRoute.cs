@@ -11,11 +11,9 @@ namespace BlaBlaCar.Domain
     /// </summary>
     public class BookRoute : Entity
     {
-        // бронирования
-        public int Id { get; set; }
-        // ID пассажира
+        // пассажир
         public Employee Passenger { get; set; }
-        // ID маршрута
+        // маршрут
         public Route Route { get; set; }
 
     }

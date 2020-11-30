@@ -33,7 +33,6 @@ namespace BlaBlaCar.Controllers
                     Date = x.Date,
                     Car = x.Car
                 }).OrderByDescending(x => x.Date);
-
             return View(routes);
         }
 

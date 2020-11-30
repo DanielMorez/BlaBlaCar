@@ -11,8 +11,6 @@ namespace BlaBlaCar.Domain
     /// </summary>
     public class Route : Entity
     {
-        // ID маршрута
-        public long RouteId { get; set; }
         // Водителя, создавший маршрут
         public Employee Driver { get; set; }
         // Название автомобиля
