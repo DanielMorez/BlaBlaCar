@@ -3,5 +3,40 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">BlaBlaCar 3</h1>
+    <h1 class="display-4">BlaBlaCar TEST 2</h1>
+
+    <div class="d-flex justify-content-center">
+        @* <form method="post" action="/Home">
+            <div class="row">
+                <input value="@ViewBag.BookId" type="text" id="myinput" placeholder="Откуда" />
+            </div>
+            <div class="row">
+                <input type="text" id="myinput" placeholder="Куда" />
+            </div>
+            <div class="row">
+                <input type="date" id="start" name="trip-start"
+                       value="2020-11-30"
+                       min="2020-11-01" max="2021-12-31">
+            </div>
+            <div class="row">
+                <input type="number" id="myinput" value="1" min="1" max="21"/>
+            </div>
+        </form>*@
+
+        @foreach (var post in Model)
+        {
+            <div class="card">
+                <div class="card-header">
+                    @post.Driver
+                </div>
+                <div class="card-body">
+                    <blockquote class="blockquote mb-0">
+                        <p>@post.Car</p>
+                        <footer class="blockquote-footer">@post.Driver (<cite title="Source Title">@post.Date</cite>)</footer>
+                    </blockquote>
+                </div>
+            </div>
+        }
+
+    </div>
 </div>

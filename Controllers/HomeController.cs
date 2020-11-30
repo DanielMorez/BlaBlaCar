@@ -1,5 +1,8 @@
-﻿using BlaBlaCar.Models;
+﻿using BlaBlaCar.Domain.DB;
+using BlaBlaCar.Models;
+using BlaBlaCar.ViewModels.Route;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -12,15 +15,26 @@ namespace BlaBlaCar.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly RouteDbContext _routeDbContext;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, RouteDbContext routeDbContext)
         {
             _logger = logger;
+            _routeDbContext = routeDbContext ?? throw new ArgumentNullException(nameof(RouteDbContext));
         }
 
         public IActionResult Index()
         {
-            return View();
+            // создаем контекст данных
+            var routes = _routeDbContext.Routes
+                .Select(x => new ShowAllRouteViewModel
+                {
+                    Driver = x.Driver.FullName,
+                    Date = x.Date,
+                    Car = x.Car
+                }).OrderByDescending(x => x.Date);
+
+            return View(routes);
         }
 
         public IActionResult Privacy()

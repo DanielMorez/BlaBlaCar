@@ -17,6 +17,7 @@ namespace BlaBlaCar.Domain.DB
         {
             Database.EnsureCreated();
         }
+
         public override DbSet<User> Users { get; set; }
         public DbSet<Route> Routes { get; set; }
         public DbSet<BookRoute> BookRoutes { get; set; }
