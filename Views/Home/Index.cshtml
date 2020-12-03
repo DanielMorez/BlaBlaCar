@@ -25,17 +25,45 @@
 
         @foreach (var post in Model)
         {
-            <div class="card">
+            <div class="card" style="width: 60rem;">
                 <div class="card-header">
-                    @post.Driver
+                    <div class="container">
+                        <div class="row">
+                            <div class="col">
+                                <h4 class="display-4" style="font-size: 150%;">
+                                    <b>@post.FromCity - @post.ToCity</b>
+                                </h4>
+                            </div>
+                            <div class="col">
+                                <h4 class="display-4" style="font-size: 150%;">
+                                    <b>@post.Price ₽/пассажир</b>
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                    @*<div class="container">
+                        <div calss="row">
+                            <div class="col">
+                                <h4 class="display-4" style="font-size: 150%;">
+                                    <b>@post.FromCity - @post.ToCity</b>
+                                </h4>
+                            </div>
+
+                            <div class="col">
+                                <h4 class="display-4" style="font-size: 150%;">
+                                    <b>@post.Price ₽/пассажир</b>
+                                </h4>
+                            </div>
+                        </div>
+                    </div>*@
                 </div>
-                <div class="card-body">
-                    <blockquote class="blockquote mb-0">
-                        <p>@post.Car</p>
-                        <footer class="blockquote-footer">@post.Driver (<cite title="Source Title">@post.Date</cite>)</footer>
-                    </blockquote>
+                    <div class="card-body">
+                        <blockquote class="blockquote mb-0">
+                            <p>@post.Car</p>
+                            <footer class="blockquote-footer">@post.Driver (<cite title="Source Title">@post.Date</cite>)</footer>
+                        </blockquote>
+                    </div>
                 </div>
-            </div>
         }
 
     </div>

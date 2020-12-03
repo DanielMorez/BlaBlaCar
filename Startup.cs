@@ -28,7 +28,7 @@ namespace BlaBlaCar
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<RouteDbContext>(options =>
-                options.UseNpgsql("Username=postgres;Database=BlaBlaCar;Password=123;Host=localhost"));
+                options.UseNpgsql("Username=postgres;Database=BlaBlaCar;Password=314298;Host=localhost"));
 
 
             services.AddIdentity<User, IdentityRole<int>>(options =>

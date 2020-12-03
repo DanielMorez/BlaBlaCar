@@ -31,7 +31,10 @@ namespace BlaBlaCar.Controllers
                 {
                     Driver = x.Driver.FullName,
                     Date = x.Date,
-                    Car = x.Car
+                    Car = x.Car,
+                    Price = x.Price,
+                    FromCity = x.FromCity,
+                    ToCity = x.ToCity
                 }).OrderByDescending(x => x.Date);
             return View(routes);
         }
