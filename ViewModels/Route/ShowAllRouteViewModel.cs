@@ -50,5 +50,12 @@ namespace BlaBlaCar.ViewModels.Route
         [Required]
         [Display(Name = "Цена за пассажира")]
         public int Price { get; set; }
+
+        /// <summary>
+        /// Количество пассажиров
+        /// </summary>
+        [Required]
+        [Display(Name = "Кол-во пассажиров")]
+        public int PassengersAmount { get; set; }
     }
 }

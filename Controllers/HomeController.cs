@@ -34,7 +34,8 @@ namespace BlaBlaCar.Controllers
                     Car = x.Car,
                     Price = x.Price,
                     FromCity = x.FromCity,
-                    ToCity = x.ToCity
+                    ToCity = x.ToCity,
+                    PassengersAmount = x.PassengersAmount
                 }).OrderByDescending(x => x.Date);
             return View(routes);
         }
