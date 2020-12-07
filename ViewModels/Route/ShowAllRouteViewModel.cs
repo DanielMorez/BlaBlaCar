@@ -30,5 +30,33 @@ namespace BlaBlaCar.ViewModels.Route
         [Display(Name = "Машина")]
         public string Car { get; set; }
 
+        /// <summary>
+        /// Город выезда
+        /// </summary>
+        [Required]
+        [Display(Name = "Город выезда")]
+        public string FromCity { get; set; }
+
+        /// <summary>
+        /// Город выезда
+        /// </summary>
+        [Required]
+        [Display(Name = "Город приезда")]
+        public string ToCity { get; set; }
+
+        /// <summary>
+        /// Цена
+        /// </summary>
+        [Required]
+        [Display(Name = "Цена за пассажира")]
+        public int Price { get; set; }
+
+        /// <summary>
+        /// Количество пассажиров
+        /// </summary>
+        [Required]
+        [Display(Name = "Кол-во пассажиров")]
+        public int PassengersAmount { get; set; }
+
     }
 }
