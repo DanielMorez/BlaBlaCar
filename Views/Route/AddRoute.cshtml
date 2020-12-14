@@ -1,0 +1,65 @@
+﻿@model BlaBlaCar.ViewModels.Route.NewRouteViewModels
+@{
+    ViewData["Title"] = "Добавить пост";
+}
+
+<form asp-action="AddRoute" method="post">
+    <div class="card-body">
+        <div asp-validation-summary="All" class="text-danger"></div>
+
+        <div class="row">
+            <div class="dropdown col" style="text-align: left;">
+                <select id="FromCity" name="FromCity" class="btn btn-secondary dropdown-toggle">
+                    <option class="dropdown-item" value="Астрахань">Астрахань</option>
+                    <option class="dropdown-item" value="Москва">Москва</option>
+                    <option class="dropdown-item" value="Ростов-на-Дону">Ростов-на-Дону</option>
+                    <option class="dropdown-item" value="Сочи">Сочи</option>
+                </select>
+                <label for="FromCity" asp-for="FromCity"></label>
+            </div>
+            <br>
+            <div class="dropdown col" style="text-align: right;">
+                <label for="ToCity" asp-for="ToCity"></label>
+                <select id="ToCity" name="ToCity" class="btn btn-secondary dropdown-toggle">
+                    <option class="dropdown-item" value="Москва">Москва</option>
+                    <option class="dropdown-item" value="Ростов-на-Дону">Ростов-на-Дону</option>
+                    <option class="dropdown-item" value="Сочи">Сочи</option>
+                    <option class="dropdown-item" value="Астрахань">Астрахань</option>
+                </select>
+            </div>
+        </div>
+
+        <div calss="form-group bmd-form-group row">
+            <label asp-for="Date" class="bmd-label-floating"></label>
+            <input asp-for="Date" class="form-control" type="date" />
+            <span asp-validation-for="Date" class="text-danger"></span>
+        </div>
+
+        <div class="form-group bmd-form-group row">
+            <label asp-for="Car" class="bmd-label-floating"></label>
+            <input asp-for="Car" class="form-control" />
+            <span asp-validation-for="Car" class="text-danger"></span>
+        </div>
+
+        <div class="form-group bmd-form-group row">
+            <label asp-for="PassengersAmount" class="bmd-label-floating"></label>
+            <input asp-for="PassengersAmount" class="form-control" type="number" />
+            <span asp-validation-for="PassengersAmount" class="text-danger"></span>
+        </div>
+
+        <div class="form-group bmd-form-group row">
+            <label asp-for="Price" class="bmd-label-floating"></label>
+            <input asp-for="Price" class="form-control" type="number" />
+            <span asp-validation-for="Price" class="text-danger"></span>
+        </div>
+    </div>
+
+
+        <div class="card-footer justify-content-center">
+            <button type="submit" class="btn btn-primary btn-fill btn-lg">Создать маршрут</button>
+        </div>
+</form>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}
