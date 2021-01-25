@@ -1,0 +1,65 @@
+﻿@model BlaBlaCar.Domain.BookRoute
+@{
+    ViewData["Title"] = "Добавить маршрут";
+}
+
+<div class="card" style="width: 60rem;">
+    <div class="card-header">
+        <h4 class="display-4" style="font-size: 150%;">
+            Вы забронировали маршрут! @Model.Route.FromCity - @Model.Route.ToCity
+        </h4>
+
+    </div>
+    <div class="card-body display-4" style="font-size: 150%;">
+        <div class="container">
+            <div class="row">
+                <div class="col" style="text-align: left;">
+                    Водитель
+                </div>
+                <div class="col" style="text-align: left;">
+                    @Model.Passenger.FullName
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col" style="text-align: left;">
+                    Телефон
+                </div>
+                <div class="col" style="text-align: left;">
+                    @Model.Passenger.Phone
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col" style="text-align: left;">
+                    Эл. Почта
+                </div>
+                <div class="col" style="text-align: left;">
+                    @Model.Passenger.Email
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col" style="text-align: left;">
+                    Дата и время выезда
+                </div>
+                <div class="col" style="text-align: left;">
+                    @Model.Route.Date
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="card-footer">
+        <div class="justify-content-center" style="padding-top: 25px;">
+            <a type="submit" class="btn btn-primary btn-fill btn-lg">Отменить</a>
+        </div>
+    </div>
+    </div>
+
+    @section Scripts {
+        @await Html.PartialAsync("_ValidationScriptsPartial")
+    }

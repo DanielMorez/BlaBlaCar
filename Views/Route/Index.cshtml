@@ -1,0 +1,66 @@
+﻿@{
+    ViewData["Title"] = "Домашняя Страница";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Мои маршруты</h1>
+    @foreach (var post in Model)
+    {
+        <div class="row">
+            <div class="card" style="width: 60rem;">
+                <div class="card-header">
+                    <div class="container">
+
+                        <div class="col" style="text-align: left; padding-left: 10px;">
+                            <h4 class="display-4" style="font-size: 150%;">
+                                <b>@post.FromCity - @post.ToCity</b>
+                            </h4>
+                        </div>
+                        <div class="col" style="text-align: right; padding-right: 10px;">
+                            <h4 class="display-4" style="font-size: 150%;">
+                                <b>@post.Price ₽/пассажир</b>
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="container">
+
+                        <div class="col" style="text-align: left; padding-left: 10px;">
+                            <div class="display-4" style="font-size: 150%;">
+                                Время выезда: @post.Date
+                            </div>
+                        </div>
+
+                        <div class="col" style="text-align: right; padding-right: 10px;">
+                            <div class="display-4" style="font-size: 150%;">
+                                @post.PassengersAmount свободных мест
+                            </div>
+                        </div>
+
+                        <br>
+
+                        @*<div class="col" style="text-align: left; padding-left: 10px;">
+                            <a href="#" class="btn btn-primary">Забронировать</a>
+                        </div>*@
+                        <div class="col" style="text-align: right; padding-right: 10px;">
+                            <div class="display-4" style="font-size: 150%;">
+                                @post.Driver
+                                <br>
+                                @post.Car
+                            </div>
+                        </div>
+
+                        @*<blockquote class="blockquote mb-0">
+                                <p>@post.Car</p>
+                                <footer class="blockquote-footer">@post.Driver (<cite title="Source Title">@post.Date</cite>)</footer>
+                          </blockquote>*@
+                    </div>
+                </div>
+                <br>
+            </div>
+        </div>
+        <br/>
+    }
+</div>
+

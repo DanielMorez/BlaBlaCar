@@ -1,84 +1,70 @@
-﻿@{
+﻿@model BlaBlaCar.ViewModels.Route.SearchRouteViewModel
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center">
-    <h1 class="display-4">BlaBlaCar TEST </h1>
-
+    <h1 class="display-4"></h1>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
     <div class="d-flex justify-content-center">
-        @* <form method="post" action="/Home">
-                <div class="row">
-                    <input value="@ViewBag.BookId" type="text" id="myinput" placeholder="Откуда" />
-                </div>
-                <div class="row">
-                    <input type="text" id="myinput" placeholder="Куда" />
-                </div>
-                <div class="row">
-                    <input type="date" id="start" name="trip-start"
-                           value="2020-11-30"
-                           min="2020-11-01" max="2021-12-31">
-                </div>
-                <div class="row">
-                    <input type="number" id="myinput" value="1" min="1" max="21"/>
-                </div>
-            </form>*@
+        <form asp-controller="Route" asp-action="Search" method="post" class="row">
+            <div asp-validation-summary="All" class="text-danger"></div>
 
-        @foreach (var post in Model)
-        {
-            <div class="card" style="width: 60rem;">
-                <div class="card-header">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col" style="text-align: left; padding-left: 10px;">
-                                <h4 class="display-4" style="font-size: 150%;">
-                                    <b>@post.FromCity - @post.ToCity</b>
-                                </h4>
-                            </div>
-                            <div class="col" style="text-align: right; padding-right: 10px;">
-                                <h4 class="display-4" style="font-size: 150%;">
-                                    <b>@post.Price ₽/пассажир</b>
-                                </h4>
-                            </div>
-                        </div>
-                    </div>
+            <div class="col">
+                <div class="form-group bmd-form-group">
+                    <label asp-for="FromCity" class="bmd-label-floating"></label>
+                    <select id="FromCity" name="FromCity" class="btn btn-secondary dropdown-toggle">
+                        <option class="dropdown-item" value="Астрахань">Астрахань</option>
+                        <option class="dropdown-item" value="Москва">Москва</option>
+                        <option class="dropdown-item" value="Ростов-на-Дону">Ростов-на-Дону</option>
+                        <option class="dropdown-item" value="Сочи">Сочи</option>
+                    </select>
                 </div>
-                <div class="card-body">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col" style="text-align: left; padding-left: 10px;">
-                                <div class="display-4" style="font-size: 150%;">
-                                    Время выезда: @post.Date
-                                </div>
-                            </div>
-
-                            <div class="col" style="text-align: right; padding-right: 10px;">
-                                <div class="display-4" style="font-size: 150%;" >
-                                    @post.PassengersAmount свободных мест
-                                </div>
-                            </div>
-                        </div>
-                        <br>
-                        <div class="row">
-                            <div class="col" style="text-align: left; padding-left: 10px;">
-                                <a href="#" class="btn btn-primary">Забронировать</a>
-                            </div>
-                            <div class="col" style="text-align: right; padding-right: 10px;">
-                                <div class="display-4" style="font-size: 150%;">
-                                    @post.Driver
-                                    <br>
-                                    @post.Car
-                                </div>
-                            </div>
-                        </div>
-
-                        @*<blockquote class="blockquote mb-0">
-                                <p>@post.Car</p>
-                                <footer class="blockquote-footer">@post.Driver (<cite title="Source Title">@post.Date</cite>)</footer>
-                            </blockquote>*@
-                    </div>
-                </div>
-                <br>
             </div>
-        }
+
+            <div class="col">
+                <div class="form-group bmd-form-group">
+                    <label asp-for="ToCity" class="bmd-label-floating"></label>
+                    <select id="ToCity" name="ToCity" class="btn btn-secondary dropdown-toggle">
+                        <option class="dropdown-item" value="Москва">Москва</option>
+                        <option class="dropdown-item" value="Астрахань">Астрахань</option>
+                        <option class="dropdown-item" value="Ростов-на-Дону">Ростов-на-Дону</option>
+                        <option class="dropdown-item" value="Сочи">Сочи</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="form-group bmd-form-group">
+                    <label asp-for="Date" class="bmd-label-floating"></label>
+                    <input asp-for="Date" class="form-control" type="date" value="2020-12-17">
+                    <span asp-validation-for="Date" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="form-group bmd-form-group">
+                    <label asp-for="PassengersAmount" class="bmd-label-floating"></label>
+                    <input asp-for="PassengersAmount" class="form-control" type="number" min="1" max="10" value="1">
+                    <span asp-validation-for="PassengersAmount" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="justify-content-center" style="padding-top: 25px;">
+                    <button type="submit" class="btn btn-primary btn-fill btn-lg">Поиск</button>
+                </div>
+            </div>
+
+        </form>
+
     </div>
 </div>

@@ -1,0 +1,81 @@
+﻿@using Microsoft.AspNetCore.Identity
+@model IEnumerable<BlaBlaCar.ViewModels.Route.ShowAllRouteViewModel>
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+
+@{ ViewData["Title"] = "Поиск"; }
+
+<h4 class="display-4">Найденые маршруты</h4>
+<br>
+
+@for (int i = 0; i < Model.Count<BlaBlaCar.ViewModels.Route.ShowAllRouteViewModel>();i++)
+{
+
+    
+
+        <div class="row">
+
+            <div class="card" style="width: 60rem;">
+                <div class="card-header">
+                    <div class="container">
+
+                        <div class="col" style="text-align: left; padding-left: 10px;">
+                            <h4 class="display-4" style="font-size: 150%;">
+                                <b>@Model.ToList()[i].FromCity - @Model.ToList()[i].ToCity</b>
+                            </h4>
+                        </div>
+                        <div class="col" style="text-align: right; padding-right: 10px;">
+                            <h4 class="display-4" style="font-size: 150%;">
+                                <b>@Model.ToList()[i].Price ₽/пассажир</b>
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="container">
+
+                        <div class="col" style="text-align: left; padding-left: 10px;">
+                            <div class="display-4" style="font-size: 150%;">
+                                Время выезда: @Model.ToList()[i].Date
+                            </div>
+                        </div>
+
+                        <div class="col" style="text-align: right; padding-right: 10px;">
+                            <div class="display-4" style="font-size: 150%;">
+                                @Model.ToList()[i].PassengersAmount свободных мест
+                            </div>
+                        </div>
+
+                        <br>
+
+                        <div class="col" style="text-align: left; padding-left: 10px;">
+                            @if (SignInManager.IsSignedIn(User))
+                            {<form asp-controller="Route" asp-action="BookRoute" method="post">
+                                <div asp-validation-summary="All" class="text-danger"></div>
+                                <input type="hidden" name="Id" value="@Model.ToList()[i].Id">
+                                <button type="submit" class="btn btn-primary btn-fill btn-lg">
+                                    Забронировать
+                                </button>
+                                </form>     
+                             }                           
+                              @if (!SignInManager.IsSignedIn(User))
+                                {
+                                    <a asp-controller="Account" asp-action="Login" class="btn btn-primary">Войдите, чтобы забронировать</a>
+                                }
+                            </div>
+                        <div class="col" style="text-align: right; padding-right: 10px;">
+                            <div class="display-4" style="font-size: 150%;">
+                                @Model.ToList()[i].Driver
+                                <br>
+                                @Model.ToList()[i].Car
+                                <br>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+            </div>
+        </div>
+    @*</form>*@
+    <br />
+}

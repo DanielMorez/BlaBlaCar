@@ -23,28 +23,25 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
+                        @*<li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Найти попутку</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Правила</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            @if (SignInManager.IsSignedIn(User))
-            {
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <ul class="navbar-nav flex-grow-1">
+                        </li>*@
+                        @if (SignInManager.IsSignedIn(User))
+                        {
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Route" asp-action="AddRoute">Создать маршрут</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Blog" asp-action="UserPosts">Мои брони</a>
-                        </li>
+                                    @*<li class="nav-item">
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="Blog" asp-action="UserPosts">Мои брони</a>
+                                    </li>*@
+                        }
                     </ul>
                 </div>
-            }
+            </div>
+            
 
                     <div class="collapse navbar-collapse justify-content-end">
                         @await Html.PartialAsync("_LoginPartial")

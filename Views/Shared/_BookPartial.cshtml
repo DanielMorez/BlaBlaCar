@@ -1,0 +1,11 @@
+﻿@using Microsoft.AspNetCore.Identity
+
+@model BlaBlaCar.ViewModels.Route.ShowAllRouteViewModel
+
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+
+@if (SignInManager.IsSignedIn(User))
+{
+    
+}

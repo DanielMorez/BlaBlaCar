@@ -26,7 +26,7 @@ namespace BlaBlaCar.Controllers
         public IActionResult Index()
         {
             // создаем контекст данных
-            var routes = _routeDbContext.Routes
+            /*var routes = _routeDbContext.Routes
                 .Select(x => new ShowAllRouteViewModel
                 {
                     Driver = x.Driver.FullName,
@@ -36,8 +36,8 @@ namespace BlaBlaCar.Controllers
                     FromCity = x.FromCity,
                     ToCity = x.ToCity,
                     PassengersAmount = x.PassengersAmount
-                }).OrderByDescending(x => x.Date);
-            return View(routes);
+                }).OrderByDescending(x => x.Date);*/
+            return View();
         }
 
         public IActionResult Privacy()

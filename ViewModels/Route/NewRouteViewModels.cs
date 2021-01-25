@@ -42,7 +42,7 @@ namespace BlaBlaCar.ViewModels.Route
         /// </summary>
         [Required]
         [Display(Name = "Машина")]
-        public String Car{ get; set; }
+        public String Car { get; set; }
         /// <summary>
         /// Количесество пассажиров
         /// </summary>
