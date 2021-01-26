@@ -80,18 +80,13 @@ namespace BlaBlaCar.Controllers
         public IActionResult Index()
         {
             // создаем контекст данных
-            var routes = _routeDbContext.Routes
-                .Select(x => new ShowAllRouteViewModel
-                {
-                    Driver = x.Driver.FullName,
-                    Date = x.Date,
-                    Car = x.Car,
-                    Price = x.Price,
-                    FromCity = x.FromCity,
-                    ToCity = x.ToCity,
-                    PassengersAmount = x.PassengersAmount
-                }).OrderByDescending(x => x.Date);
-            return View(routes);
+            var user = this.GetAuthorizedUser();
+            long driverId = user.Id + 1;
+
+            
+
+
+            return View();
         }
 
         /// <summary>
@@ -106,7 +101,7 @@ namespace BlaBlaCar.Controllers
             if (model.PassengersAmount == 0)
             {
                 return Redirect("/Home/Index");
-            } 
+            }
 
             if (!ModelState.IsValid)
                 return View(model);
@@ -116,7 +111,7 @@ namespace BlaBlaCar.Controllers
                 .Select(x => new ShowAllRouteViewModel
                 {
                     Id = x.Id,
-                    Driver = x.Driver.FullName,
+                    Driver = x.Driver,
                     Date = x.Date,
                     Car = x.Car,
                     Price = x.Price,
@@ -127,13 +122,11 @@ namespace BlaBlaCar.Controllers
                          select m;
 
 
-
             routes = routes.Where(
-                    s => s.ToCity.Contains(model.ToCity) && 
-                         s.FromCity.Contains(model.FromCity) && 
+                    s => s.ToCity.Contains(model.ToCity) &&
+                         s.FromCity.Contains(model.FromCity) &&
                          s.Date >= model.Date &&
                          s.PassengersAmount >= model.PassengersAmount);
-
 
             foreach (ShowAllRouteViewModel r in routes) {
                 Console.WriteLine(r);
@@ -152,24 +145,17 @@ namespace BlaBlaCar.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult BookRoute(long RouteId)
-        {   
+        {
             var user = this.GetAuthorizedUser();
-            Console.WriteLine("--------ROUTE ID---");
-            Console.WriteLine(RouteId);
-            Console.WriteLine("-------------------");
-            /*Route route = _routeDbContext.Routes
-                    .Where(
-                        b => b.Id == RouteId
-                    )
-                    .FirstOrDefault();*/
+
             Route route = null;
             foreach (Route r in _routeDbContext.Routes) {
                 Console.WriteLine(r.Id);
-                if (r.Id == RouteId+1) {
+                if (r.Id == RouteId + 1) {
                     route = r;
                 }
             }
-            
+
             Console.WriteLine(user.Employee);
 
             var book = new BookRoute {
@@ -200,5 +186,25 @@ namespace BlaBlaCar.Controllers
                 );*/
             return View();
         }
+
+        /// <summary>
+        /// Метод открывает страницу с изменением личного маршрута
+        /// </summary>
+        /// <param name="RouteId"></param>
+        /// <returns>Возварщает страницу для изменения (поста) маршрута</returns>
+        [Authorize]
+        [HttpGet]
+        public IActionResult ChangeRoute(long RouteId, ChangeRouteViewModel model)
+        {
+            var user = this.GetAuthorizedUser();
+
+            Route route = _routeDbContext.Routes.Find(RouteId);
+                
+
+           
+
+            return View(route);
+        }
+
     }
 }

@@ -49,23 +49,39 @@
                         <br>
 
                         <div class="col" style="text-align: left; padding-left: 10px;">
-                            @if (SignInManager.IsSignedIn(User))
-                            {<form asp-controller="Route" asp-action="BookRoute" method="post">
-                                <div asp-validation-summary="All" class="text-danger"></div>
-                                <input type="hidden" name="Id" value="@Model.ToList()[i].Id">
-                                <button type="submit" class="btn btn-primary btn-fill btn-lg">
-                                    Забронировать
-                                </button>
-                                </form>     
-                             }                           
-                              @if (!SignInManager.IsSignedIn(User))
+                            @{ 
+                                                  
+                                var user = await UserManager.GetUserAsync(User);
+                                if (SignInManager.IsSignedIn(User) && (user.Id+1 != Model.ToList()[i].Driver.Id))
+
+                                {
+                                    <form asp-controller="Route" asp-action="BookRoute" method="post">
+                                        <div asp-validation-summary="All" class="text-danger"></div>
+                                        <input type="hidden" name="Id" value="Model.ToList()[i].Id">
+                                        <button type="submit" class="btn btn-primary btn-fill btn-lg">
+                                            Забронировать
+                                        </button>
+                                    </form>
+                                }
+                                else if (SignInManager.IsSignedIn(User) && (user.Id+1 == Model.ToList()[i].Driver.Id))
+                                {
+                                    <form asp-controller="Route" asp-action="ChangeRoute" method="get">
+                                        <div asp-validation-summary="All" class="text-danger"></div>
+                                        <input type="hidden" name="RouteId" value="@Model.ToList()[i].Id">
+                                        <button type="submit" class="btn btn-primary btn-fill btn-lg">
+                                            Посмотреть мой маршрут
+                                        </button>
+                                    </form>
+                                }
+                                else if (!SignInManager.IsSignedIn(User))
                                 {
                                     <a asp-controller="Account" asp-action="Login" class="btn btn-primary">Войдите, чтобы забронировать</a>
                                 }
-                            </div>
+                            }
+                        </div>
                         <div class="col" style="text-align: right; padding-right: 10px;">
                             <div class="display-4" style="font-size: 150%;">
-                                @Model.ToList()[i].Driver
+                                @Model.ToList()[i].Driver.FullName
                                 <br>
                                 @Model.ToList()[i].Car
                                 <br>

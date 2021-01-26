@@ -1,0 +1,63 @@
+﻿@model BlaBlaCar.Domain.Route
+@{
+    ViewData["Title"] = "Добавить маршрут";
+}
+
+<form asp-action="AddRoute" method="post">
+    <div class="card-header">
+        <h5 class="display-4" style="max-width: 22em;">
+            @Model.FromCity - @Model.ToCity
+        </h5>
+    </div>
+
+    <div class="card-body">
+
+        <div class="row mt-3 mb-3">
+
+            <div class="col-3">
+                @Model.Driver.FullName
+            </div>
+            <div class="col-3">
+                @Model.Car
+            </div>
+            <div class="col-3">
+                Количество свободных мест: <strong>@Model.PassengersAmount</strong>
+            </div>
+
+        </div>
+
+        <div class="row mt-3 mb-3">
+
+            <div class="col-3">
+                <label asp-for="Price" class="bmd-label-floating">Цена за пассажира</label>
+            </div>
+
+            <div class="col-3">
+                <div class="form-group bmd-form-group">
+                    
+                    <input asp-for="Price" class="form-control" type="number" />
+                    <span asp-validation-for="Price" class="text-danger"></span>
+                </div>
+
+            </div>
+
+            <div class="col-3">
+                <button type="submit" class="btn btn-primary">Применить изменения</button>
+            </div>
+
+        </div>
+
+        
+
+        <div class="row card-footer justify-content-center">
+            <div class="col-3">
+                <button type="submit" class="btn btn-danger">Удалить маршрут</button>
+            </div>
+        </div>
+
+
+</form>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}
