@@ -21,44 +21,21 @@ namespace BlaBlaCar.Controllers
         }
         public IActionResult Index()
         {
-            return View();
-        }
-
-        /*/// <summary>
-        /// Создание брони
-        /// </summary>
-        /// <param name="model"></param>
-        /// <returns>Переход на страницу постов пользователя</returns>
-        [Authorize]
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult BookRoute(BookRouteViewModel model)
-        {
-
-            if (!ModelState.IsValid)
-                return View(model);
-
             var user = this.GetAuthorizedUser();
 
-            Console.WriteLine(model);
+            var bookRoutes = new List<BookRoute>();
 
-            *//*var post = new Route
-            {
-                Driver = user.Employee,
-                Car = model.Car,
-                ToCity = model.ToCity,
-                FromCity = model.FromCity,
-                Price = model.Price,
-                Date = model.Date,
-                PassengersAmount = model.PassengersAmount
-            };
+            foreach (BookRoute bookRoute in _routeDbContext.BookRoutes)
+            {   
+                if (user.Employee.Id == bookRoute.Passenger.Id)
+                {
+                    bookRoutes.Add(bookRoute);
+                }
+            }
+            
+            return View(bookRoutes);
+        }
 
-            _routeDbContext.Routes.Add(post);
-
-            _routeDbContext.SaveChanges();*//*
-
-            return View();
-
-        }*/
+       
     }
 }

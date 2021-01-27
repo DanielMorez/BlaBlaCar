@@ -83,10 +83,18 @@ namespace BlaBlaCar.Controllers
             var user = this.GetAuthorizedUser();
             long driverId = user.Id + 1;
 
-            
+            var routes = _routeDbContext.Routes;
 
+            var userRoutes = new List<Route>();
 
-            return View();
+            foreach (var route in routes) {
+                if (route.Driver.Id == driverId)
+                {
+                    userRoutes.Add(route);
+                }
+            }
+
+            return View(userRoutes);
         }
 
         /// <summary>
@@ -206,5 +214,57 @@ namespace BlaBlaCar.Controllers
             return View(route);
         }
 
+        /// <summary>
+        /// Удаление брони
+        /// </summary>
+        /// <returns>Переход на страницу постов пользователя</returns>
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult RemoveRoute(long RouteId)
+        {
+            var user = this.GetAuthorizedUser();
+
+            Route route = _routeDbContext.Routes.Find(RouteId);
+
+            foreach (BookRoute bookRoute in _routeDbContext.BookRoutes)
+            {
+                if (bookRoute.Route != null) {
+                    if (bookRoute.Route.Id == RouteId)
+                    {
+                        _routeDbContext.BookRoutes.Remove(bookRoute);
+                    }
+                }
+                
+            }
+
+            _routeDbContext.Routes.Remove(route);
+            _routeDbContext.SaveChanges();
+
+            return RedirectToAction("Index", "Route");
+            
+        }
+
+
+        /// <summary>
+        /// Удаление брони
+        /// </summary>
+        /// <returns>Переход на страницу постов пользователя</returns>
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult ChangePrice(long RouteId, int Price)
+        {
+            var user = this.GetAuthorizedUser();
+
+            Route route = _routeDbContext.Routes.Find(RouteId);
+
+            route.Price = Price;
+
+            _routeDbContext.SaveChanges();
+
+            return RedirectToAction("Index", "Route");
+
+        }
     }
 }

@@ -1,3 +1,59 @@
-﻿@{ ViewData["Title"] = "Поиск"; }
+﻿
 
-<h1>ХУЙ</h1>
+@{ ViewData["Title"] = "Поиск"; }
+
+@foreach (Route post in Model)
+{
+    <div class="card mt-3 mb-3">
+       
+        <div class="card-header">
+            <h5 class="display-4" style="font-size: 2em;">@post.FromCity - @post.ToCity</h5>
+        </div>
+
+        <div class="card-body">
+            <div class="row">
+
+                <div class="col-3">
+                    @post.Driver.FullName
+                </div>
+
+                <div class="col-3">
+                    @post.Car
+                </div>
+
+                <div class="col-3">
+                    Количество свободных мест в машине: <strong>@post.PassengersAmount</strong>
+                </div>
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-3">
+                    Откуда: <strong>@post.FromCity</strong>
+                </div>
+
+                <div class="col-3">
+                    Куда: <strong>@post.Car</strong>
+                </div>
+
+                <div class="col-3">
+                    Дата выезда: <strong>@post.Date</strong>
+                </div>
+                   
+            </div>
+
+        </div>
+
+        <div class="card-footer">
+            <form asp-controller="Route" asp-action="ChangeRoute" method="get">
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <input type="hidden" name="RouteId" value="@post.Id">
+                <button type="submit" class="btn btn-primary btn-fill btn-lg">
+                    Посмотреть
+                </button>
+            </form>
+        </div>
+         
+    </div>
+}

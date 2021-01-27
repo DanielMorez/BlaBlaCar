@@ -1,9 +1,11 @@
-﻿@model BlaBlaCar.Domain.Route
+﻿@using Microsoft.AspNetCore.Identity
+
+@model BlaBlaCar.Domain.Route
 @{
     ViewData["Title"] = "Добавить маршрут";
 }
 
-<form asp-action="AddRoute" method="post">
+
     <div class="card-header">
         <h5 class="display-4" style="max-width: 22em;">
             @Model.FromCity - @Model.ToCity
@@ -11,6 +13,7 @@
     </div>
 
     <div class="card-body">
+
 
         <div class="row mt-3 mb-3">
 
@@ -26,38 +29,41 @@
 
         </div>
 
-        <div class="row mt-3 mb-3">
+        <form asp-controller="Route" asp-action="ChangePrice" method="post">
+            <div class="row mt-3 mb-3">
 
-            <div class="col-3">
-                <label asp-for="Price" class="bmd-label-floating">Цена за пассажира</label>
-            </div>
+                <div class="col-3">
+                    <label asp-for="Price" class="bmd-label-floating">Цена за пассажира</label>
+                </div>
 
-            <div class="col-3">
-                <div class="form-group bmd-form-group">
-                    
-                    <input asp-for="Price" class="form-control" type="number" />
-                    <span asp-validation-for="Price" class="text-danger"></span>
+                <div class="col-3">
+                    <div class="form-group bmd-form-group">
+
+                        <input type="hidden" name="RouteId" value="@Model.Id">
+                        <input asp-for="Price" class="form-control" name="Price" type="number" min="1" />
+
+                    </div>
+
+                </div>
+                <div class="col-3">
+                    <button type="submit" class="btn btn-primary">Применить изменения</button>
                 </div>
 
             </div>
+        </form>
 
-            <div class="col-3">
-                <button type="submit" class="btn btn-primary">Применить изменения</button>
+
+
+            <div class="row card-footer justify-content-right">
+                <div class="col-3">
+                    <form asp-controller="Route" asp-action="RemoveRoute" method="post">
+                        <input type="hidden" name="RouteId" value="@Model.Id">
+                        <button type="submit" class="btn btn-danger">Удалить</button>
+                    </form>
+
+                </div>
             </div>
 
-        </div>
-
-        
-
-        <div class="row card-footer justify-content-center">
-            <div class="col-3">
-                <button type="submit" class="btn btn-danger">Удалить маршрут</button>
-            </div>
-        </div>
-
-
-</form>
-
-@section Scripts {
-    @await Html.PartialAsync("_ValidationScriptsPartial")
-}
+            @section Scripts {
+                @await Html.PartialAsync("_ValidationScriptsPartial")
+            }
