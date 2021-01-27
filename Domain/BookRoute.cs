@@ -14,7 +14,7 @@ namespace BlaBlaCar.Domain
         // пассажир
         public Employee Passenger { get; set; }
         // маршрут
-        public Route Route { get; set; }
+        public long RouteId { get; set; }
 
     }
 }

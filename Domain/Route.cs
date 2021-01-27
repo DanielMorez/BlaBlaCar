@@ -1,4 +1,5 @@
 ﻿using BlaBlaCar.Domain.Common;
+using BlaBlaCar.ViewModels.Route;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,5 +26,10 @@ namespace BlaBlaCar.Domain
         public DateTime Date { get; set; }
         // кол-во возможных пассажиров
         public int PassengersAmount { get; set; }
+
+        public static implicit operator Route(ShowAllRouteViewModel v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

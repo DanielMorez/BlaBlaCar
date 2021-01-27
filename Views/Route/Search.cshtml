@@ -49,18 +49,17 @@
                             @{ 
                                                   
                                 var user = await UserManager.GetUserAsync(User);
-                                if (SignInManager.IsSignedIn(User) && (user.Id+1 != Model.ToList()[i].Driver.Id))
+                                if (SignInManager.IsSignedIn(User) && (user.Id != Model.ToList()[i].Driver.Id))
 
                                 {
                                     <form asp-controller="Route" asp-action="BookRoute" method="post">
-                                        <div asp-validation-summary="All" class="text-danger"></div>
-                                        <input type="hidden" name="Id" value="Model.ToList()[i].Id">
+                                        <input type="hidden" name="RouteId" value="@Model.ToList()[i].Id">
                                         <button type="submit" class="btn btn-primary btn-fill btn-lg">
                                             Забронировать
                                         </button>
                                     </form>
                                 }
-                                else if (SignInManager.IsSignedIn(User) && (user.Id+1 == Model.ToList()[i].Driver.Id))
+                                else if (SignInManager.IsSignedIn(User) && (user.Id == Model.ToList()[i].Driver.Id))
                                 {
                                     <form asp-controller="Route" asp-action="ChangeRoute" method="get">
                                         <div asp-validation-summary="All" class="text-danger"></div>

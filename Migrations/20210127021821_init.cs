@@ -99,7 +99,6 @@ namespace BlaBlaCar.Migrations
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    RouteId = table.Column<long>(type: "bigint", nullable: false),
                     DriverId = table.Column<long>(type: "bigint", nullable: true),
                     Car = table.Column<string>(type: "text", nullable: false),
                     FromCity = table.Column<string>(type: "text", nullable: false),
@@ -208,7 +207,7 @@ namespace BlaBlaCar.Migrations
                 name: "BookRoutes",
                 columns: table => new
                 {
-                    Book = table.Column<int>(type: "integer", nullable: false)
+                    Book = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     PassengerId = table.Column<long>(type: "bigint", nullable: true),
                     RouteId = table.Column<long>(type: "bigint", nullable: true)

@@ -1,4 +1,4 @@
-﻿@model BlaBlaCar.Domain.BookRoute
+﻿
 @{
     ViewData["Title"] = "Добавить маршрут";
 }
@@ -6,7 +6,7 @@
 <div class="card" style="width: 60rem;">
     <div class="card-header">
         <h4 class="display-4" style="font-size: 150%;">
-            Вы забронировали маршрут! @Model.Route.FromCity - @Model.Route.ToCity
+            Вы забронировали маршрут! Подробнее смотрите в своих бронях!
         </h4>
 
     </div>
@@ -17,7 +17,7 @@
                     Водитель
                 </div>
                 <div class="col" style="text-align: left;">
-                    @Model.Passenger.FullName
+                    @Model.FullName
                 </div>
 
             </div>
@@ -27,7 +27,7 @@
                     Телефон
                 </div>
                 <div class="col" style="text-align: left;">
-                    @Model.Passenger.Phone
+                    @Model.Phone
                 </div>
             </div>
 
@@ -36,17 +36,7 @@
                     Эл. Почта
                 </div>
                 <div class="col" style="text-align: left;">
-                    @Model.Passenger.Email
-                </div>
-
-            </div>
-
-            <div class="row">
-                <div class="col" style="text-align: left;">
-                    Дата и время выезда
-                </div>
-                <div class="col" style="text-align: left;">
-                    @Model.Route.Date
+                    @Model.Email
                 </div>
 
             </div>

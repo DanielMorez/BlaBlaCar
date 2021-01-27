@@ -3,15 +3,17 @@ using System;
 using BlaBlaCar.Domain.DB;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace BlaBlaCar.Migrations
 {
     [DbContext(typeof(RouteDbContext))]
-    partial class RouteDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210127021821_init")]
+    partial class init
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,13 +32,15 @@ namespace BlaBlaCar.Migrations
                     b.Property<long?>("PassengerId")
                         .HasColumnType("bigint");
 
-                    b.Property<long>("RouteId")
+                    b.Property<long?>("RouteId")
                         .HasColumnType("bigint");
 
                     b.HasKey("Id")
                         .HasAnnotation("Npgsql:Serial", true);
 
                     b.HasIndex("PassengerId");
+
+                    b.HasIndex("RouteId");
 
                     b.ToTable("BookRoutes");
                 });
@@ -324,7 +328,13 @@ namespace BlaBlaCar.Migrations
                         .WithMany()
                         .HasForeignKey("PassengerId");
 
+                    b.HasOne("BlaBlaCar.Domain.Route", "Route")
+                        .WithMany()
+                        .HasForeignKey("RouteId");
+
                     b.Navigation("Passenger");
+
+                    b.Navigation("Route");
                 });
 
             modelBuilder.Entity("BlaBlaCar.Domain.Route", b =>

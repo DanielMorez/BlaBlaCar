@@ -1,11 +1,49 @@
 ﻿@using Microsoft.AspNetCore.Identity
 
-@model BlaBlaCar.Domain.Route
+
 @{
     ViewData["Title"] = "Мои брони";
 }
 
+@foreach (var post in Model)
+{
 
+    <div class="card mt-3 mb-3">
+       
+        <div class="card-header">
+            <h5 class="display-4" style="font-size: 2em;">@post.FromCity - @post.ToCity</h5>
+        </div>
+
+        <div class="card-body">
+            <div class="row">
+
+                <div class="col-3">
+                    @post.Driver.FullName
+                </div>
+
+                <div class="col-3">
+                    @post.Car
+                </div>
+
+                <div class="col-3">
+                    Количество свободных мест в машине: <strong>@post.PassengersAmount</strong>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="card-footer">
+            <form asp-controller="Book" asp-action="RemoveBook" method="post">
+                <input type="hidden" name="RouteId" value="@post.Id">
+                <button type="submit" class="btn btn-primary btn-fill btn-lg">
+                    Отменить
+                </button>
+            </form>
+        </div>
+         
+    </div>
+}
 
 
 @section Scripts {

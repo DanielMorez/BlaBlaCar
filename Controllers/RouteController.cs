@@ -81,14 +81,14 @@ namespace BlaBlaCar.Controllers
         {
             // создаем контекст данных
             var user = this.GetAuthorizedUser();
-            long driverId = user.Id + 1;
+            long driverId = user.Id;
 
             var routes = _routeDbContext.Routes;
 
             var userRoutes = new List<Route>();
 
             foreach (var route in routes) {
-                if (route.Driver.Id == driverId)
+                if (route.Driver != null)
                 {
                     userRoutes.Add(route);
                 }
@@ -156,29 +156,16 @@ namespace BlaBlaCar.Controllers
         {
             var user = this.GetAuthorizedUser();
 
-            Route route = null;
-            foreach (Route r in _routeDbContext.Routes) {
-                Console.WriteLine(r.Id);
-                if (r.Id == RouteId + 1) {
-                    route = r;
-                }
-            }
-
-            Console.WriteLine(user.Employee);
-
             var book = new BookRoute {
                 Passenger = user.Employee,
-                Route = route
+                RouteId = RouteId
             };
 
             _routeDbContext.BookRoutes.Add(book);
 
             _routeDbContext.SaveChanges();
 
-
-            Console.WriteLine(book.Route.ToCity);
-
-            return View(book);
+            return View(user.Employee);
 
         }
 
@@ -229,8 +216,8 @@ namespace BlaBlaCar.Controllers
 
             foreach (BookRoute bookRoute in _routeDbContext.BookRoutes)
             {
-                if (bookRoute.Route != null) {
-                    if (bookRoute.Route.Id == RouteId)
+                if (bookRoute.RouteId != null) {
+                    if (bookRoute.RouteId == RouteId)
                     {
                         _routeDbContext.BookRoutes.Remove(bookRoute);
                     }

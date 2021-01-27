@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace BlaBlaCar.Migrations
 {
     [DbContext(typeof(RouteDbContext))]
-    [Migration("20201130100606_init")]
-    partial class init
+    [Migration("20210127032017_BookRoute")]
+    partial class BookRoute
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,24 +23,22 @@ namespace BlaBlaCar.Migrations
 
             modelBuilder.Entity("BlaBlaCar.Domain.BookRoute", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
+                        .HasColumnType("bigint")
                         .HasColumnName("Book")
                         .UseIdentityByDefaultColumn();
 
                     b.Property<long?>("PassengerId")
                         .HasColumnType("bigint");
 
-                    b.Property<long?>("RouteId")
+                    b.Property<long>("RouteId")
                         .HasColumnType("bigint");
 
                     b.HasKey("Id")
                         .HasAnnotation("Npgsql:Serial", true);
 
                     b.HasIndex("PassengerId");
-
-                    b.HasIndex("RouteId");
 
                     b.ToTable("BookRoutes");
                 });
@@ -107,10 +105,6 @@ namespace BlaBlaCar.Migrations
                     b.Property<int>("Price")
                         .HasColumnType("integer")
                         .HasColumnName("Price");
-
-                    b.Property<long>("RouteId")
-                        .HasColumnType("bigint")
-                        .HasColumnName("RouteId");
 
                     b.Property<string>("ToCity")
                         .IsRequired()
@@ -332,13 +326,7 @@ namespace BlaBlaCar.Migrations
                         .WithMany()
                         .HasForeignKey("PassengerId");
 
-                    b.HasOne("BlaBlaCar.Domain.Route", "Route")
-                        .WithMany()
-                        .HasForeignKey("RouteId");
-
                     b.Navigation("Passenger");
-
-                    b.Navigation("Route");
                 });
 
             modelBuilder.Entity("BlaBlaCar.Domain.Route", b =>

@@ -23,19 +23,64 @@ namespace BlaBlaCar.Controllers
         {
             var user = this.GetAuthorizedUser();
 
-            var bookRoutes = new List<BookRoute>();
-
-            foreach (BookRoute bookRoute in _routeDbContext.BookRoutes)
-            {   
-                if (user.Employee.Id == bookRoute.Passenger.Id)
+            var routes = from m in _routeDbContext.Routes
+                .Select(x => new ShowAllRouteViewModel
                 {
-                    bookRoutes.Add(bookRoute);
+                    Id = x.Id,
+                    Driver = x.Driver,
+                    Date = x.Date,
+                    Car = x.Car,
+                    Price = x.Price,
+                    FromCity = x.FromCity,
+                    ToCity = x.ToCity,
+                    PassengersAmount = x.PassengersAmount
+                }).OrderByDescending(x => x.Date)
+                         select m;
+
+            var routeIds = new List<long>();
+            foreach (var book in _routeDbContext.BookRoutes)
+            {
+                if (book.Passenger != null)
+                {
+                    routeIds.Add(book.RouteId);
                 }
             }
-            
-            return View(bookRoutes);
+            routes = routes.Where(s => routeIds.Contains(s.Id));
+
+            return View(routes);
         }
 
-       
+
+        /// <summary>
+        /// Создание брони
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns>Переход на страницу постов пользователя</returns>
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult RemoveBook(long RouteId)
+        {
+            var user = this.GetAuthorizedUser();
+
+            BookRoute book = null;
+            foreach (var post in _routeDbContext.BookRoutes)
+            {
+                var u = post.Passenger;
+                var id = post.RouteId;
+                if ((u != null) && (id == RouteId))
+                {
+                    book = post;
+                }
+            }
+
+            _routeDbContext.BookRoutes.Remove(book);
+
+            _routeDbContext.SaveChanges();
+
+            return RedirectToAction("Index", "Book");
+
+        }
+
     }
 }
